@@ -9,7 +9,7 @@
 import UIKit
 import os.log
 
-class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate{
 /*****************************************************************
 ******************************************************************/
 /*================================================================
@@ -19,6 +19,8 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var ratingControl: RatingControl!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+
+ 
     
     
 /*****************************************************************
@@ -51,6 +53,14 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     
     var meal: Meal?
 
+    
+    
+/*****************************************************************
+******************************************************************/
+/*================================================================
+====== MARK: Search Bar =======================================
+=================================================================*/
+    
     
 /*****************************************************************
 ******************************************************************/

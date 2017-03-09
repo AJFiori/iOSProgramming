@@ -10,9 +10,10 @@ import UIKit
 import os.log
 
 
-class MealTableViewController: UITableViewController {
+class MealTableViewController: UITableViewController, UISearchBarDelegate {
  
     
+    @IBOutlet weak var searchBar: UISearchBar!
 /*****************************************************************
 ******************************************************************/
 /*================================================================
@@ -20,6 +21,8 @@ class MealTableViewController: UITableViewController {
 =================================================================*/
 
     var meals = [Meal]()
+    
+    var filteredMeals:  [Meal]!
     
     
     
@@ -35,6 +38,8 @@ class MealTableViewController: UITableViewController {
         //Use the edit button item provided by the table view controller
         navigationItem.leftBarButtonItem = editButtonItem
         
+        searchBar.delegate = self
+        
         //Load any saved meals. otherwise load sample data
         if let savedMeals = loadMeals(){
             meals += savedMeals
@@ -43,6 +48,7 @@ class MealTableViewController: UITableViewController {
             // Load the sample data.
             loadSampleMeals()
         }
+        filteredMeals = meals
     }
     
     
@@ -64,7 +70,8 @@ class MealTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return meals.count
+        
+        return filteredMeals.count
     }
     
     
@@ -78,7 +85,9 @@ class MealTableViewController: UITableViewController {
         }
         
         // Fetches the appropriate meal for the data source layout.
-        let meal = meals[indexPath.row]
+        let meal = filteredMeals[indexPath.row]
+        
+        //cell.nameLabel.text = filteredMeals[indexPath.row]
         
         cell.nameLabel.text = meal.name
         cell.photoImageView.image = meal.photo
@@ -102,9 +111,8 @@ class MealTableViewController: UITableViewController {
      
         if editingStyle == .delete {
             // Delete the row from the data source
-            meals.remove(at: indexPath.row)
+            meals.remove(at: meals.index(of: filteredMeals[indexPath.row]) ?? 0)
             saveMeals()
-            tableView.deleteRows(at: [indexPath], with: .fade)
         }
         else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -127,6 +135,18 @@ class MealTableViewController: UITableViewController {
      return true
      }
      */
+
+/*****************************************************************
+******************************************************************/
+/*================================================================
+====== MARK: SearchBar Method ====================================
+=================================================================*/
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
+        updateFilter()
+    }
+    
+    
     
 /*****************************************************************
 ******************************************************************/
@@ -159,7 +179,7 @@ class MealTableViewController: UITableViewController {
                     fatalError("The selected cell is not being displayed by the table")
             }
             
-            let selectedMeal = meals[indexPath.row]
+            let selectedMeal = filteredMeals[indexPath.row]
             mealDetailViewController.meal = selectedMeal
             
         default:
@@ -178,16 +198,15 @@ class MealTableViewController: UITableViewController {
             
             if let selectedIndexPath = tableView.indexPathForSelectedRow{
                 // Update an existing meal. 
-                meals[selectedIndexPath.row] = meal
+                meals[meals.index(of: filteredMeals[selectedIndexPath.row]) ?? 0] = meal
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else{
-                
                 // Add a new meal.
-                let newIndexPath = IndexPath(row: meals.count, section: 0)
+                //let newIndexPath = IndexPath(row: meals.count, section: 0)
                 
                 meals.append(meal)
-                tableView.insertRows(at: [newIndexPath], with: .automatic)
+                //tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
             
             saveMeals()
@@ -201,6 +220,13 @@ class MealTableViewController: UITableViewController {
 /*================================================================
 ====== MARK: Private Methods =====================================
 =================================================================*/
+    
+    private func updateFilter() {
+        filteredMeals = (searchBar.text ?? "").isEmpty ? meals : meals.filter{ (item: Meal) -> Bool in
+            return item.name.range(of: searchBar.text ?? "", options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        tableView.reloadData()
+    }
     
     private func loadSampleMeals() {
         
@@ -232,6 +258,8 @@ class MealTableViewController: UITableViewController {
         else{
             os_log("Failed to save meals...",log: OSLog.default, type: .error)
         }
+        
+        updateFilter();
     }
     
     private func loadMeals() -> [Meal]?{

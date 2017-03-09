@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BB1BD9F51E552BA100E34371 /* FoodTrackerTests in Resources */ = {isa = PBXBuildFile; fileRef = BB1BD9F41E552BA100E34371 /* FoodTrackerTests */; };
 		BB1BD9F71E552DD000E34371 /* MealTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1BD9F61E552DD000E34371 /* MealTableViewCell.swift */; };
 		BB1BD9F91E55318200E34371 /* MealTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1BD9F81E55318200E34371 /* MealTableViewController.swift */; };
 		BB1D80051E4C03240008BCE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1D80041E4C03240008BCE9 /* AppDelegate.swift */; };
@@ -20,7 +19,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BB1BD9F41E552BA100E34371 /* FoodTrackerTests */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FoodTrackerTests; path = ../../../Downloads/05_DefineYourDataModel/FoodTracker/FoodTrackerTests; sourceTree = "<group>"; };
 		BB1BD9F61E552DD000E34371 /* MealTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTableViewCell.swift; sourceTree = "<group>"; };
 		BB1BD9F81E55318200E34371 /* MealTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTableViewController.swift; sourceTree = "<group>"; };
 		BB1D80011E4C03240008BCE9 /* FoodTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,7 +72,6 @@
 				BB1D800B1E4C03240008BCE9 /* Assets.xcassets */,
 				BB1D800D1E4C03240008BCE9 /* LaunchScreen.storyboard */,
 				BB1D80101E4C03240008BCE9 /* Info.plist */,
-				BB1BD9F41E552BA100E34371 /* FoodTrackerTests */,
 			);
 			path = FoodTracker;
 			sourceTree = "<group>";
@@ -142,7 +139,6 @@
 				BB1D800F1E4C03240008BCE9 /* LaunchScreen.storyboard in Resources */,
 				BB1D800C1E4C03240008BCE9 /* Assets.xcassets in Resources */,
 				BB1D800A1E4C03240008BCE9 /* Main.storyboard in Resources */,
-				BB1BD9F51E552BA100E34371 /* FoodTrackerTests in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
